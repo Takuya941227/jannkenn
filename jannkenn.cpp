@@ -5,14 +5,16 @@
 
 int main(void) {
 	printf("じゃんけんプログラム\n");
-	int player = 0;
-	int com = 0;
-	int result = 0;
-	int streak = 0;
-	int continuity = 0;
-	char newline[2];
-	srand((unsigned int)time(NULL));
+	/*** 変数定義 ***/
+	int player = 0;									//プレイヤーの手
+	int com = 0;									//コンピュータの手
+	int result = 0;									//勝敗結果
+	int streak = 0;									//連勝記録
+	int continuity = 0;								//続投フラグ
+	char newline[2];								//数値チェック用
+	srand((unsigned int)time(NULL));				//ランダムシード
 	
+	/*** 実行処理 ***/
 	//つづけるを選べば繰り返し
 	do {
 		//あいこであれば繰り返し
@@ -21,7 +23,7 @@ int main(void) {
 			do	{
 				printf("グー：1　チョキ：2　パー：3\n");
 				printf("あなたの出す手を入力してください：");
-				const int m = scanf("%d%1[\n]", &player, newline);
+				const int m = scanf("%d%1[\n]", &player, newline);					//入力時に数値であるかを判定するための変数（2=数値、1=少数or数値＋記号、0=数値として解釈できないもの）
 				if (m != 2) {
 					(void)scanf("%*[^\n]");
 					printf("規定外の入力です もう一度入力してください\n\n");
@@ -30,7 +32,7 @@ int main(void) {
 					printf("規定外の入力です もう一度入力してください\n\n");
 				}
 				else {
-					player -= 1;
+					player -= 1;													//データでの管理は0,1,2のほうが管理しやすいので調整
 					break;
 				}
 			} while (true);
@@ -97,7 +99,7 @@ int main(void) {
 			printf("\t%d連勝中", streak);
 		}
 		printf("\nつづけますか：");
-		const int n = scanf("%d%1[\n]", &continuity, newline);
+		const int n = scanf("%d%1[\n]", &continuity, newline);						//入力時に数値であるかを判定するための変数（2=数値、1=少数or数値＋記号、0=数値として解釈できないもの）
 		if (n != 2 || continuity != 1) {
 			break;
 		}
