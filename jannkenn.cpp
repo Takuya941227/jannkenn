@@ -10,6 +10,7 @@ int main(void) {
 	int result = 0;
 	int streak = 0;
 	int continuity = 0;
+	char newline[2];
 	srand((unsigned int)time(NULL));
 	
 	//つづけるを選べば繰り返し
@@ -20,9 +21,12 @@ int main(void) {
 			do	{
 				printf("グー：1　チョキ：2　パー：3\n");
 				printf("あなたの出す手を入力してください：");
-				scanf_s("%d", &player);
-
-				if (player > 3 || player <= 0) {
+				const int m = scanf("%d%1[\n]", &player, newline);
+				if (m != 2) {
+					(void)scanf("%*[^\n]");
+					printf("規定外の入力です もう一度入力してください\n\n");
+				}
+				else if (player > 3 || player <= 0) {
 					printf("規定外の入力です もう一度入力してください\n\n");
 				}
 				else {
@@ -93,9 +97,8 @@ int main(void) {
 			printf("\t%d連勝中", streak);
 		}
 		printf("\nつづけますか：");
-		scanf_s("%d", &continuity);
-
-		if (continuity != 1) {
+		const int n = scanf("%d%1[\n]", &continuity, newline);
+		if (n != 2 || continuity != 1) {
 			break;
 		}
 
